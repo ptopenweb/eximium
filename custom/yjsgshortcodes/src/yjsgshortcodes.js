@@ -31,15 +31,16 @@
 
             var self = this;
 			
-			
-		var LinkShortcode = '<a class="btn yjsg-shortcode-link"';
-			LinkShortcode += ' href="'+siteroot+'templates/'+sitetemplate+'/custom/yjsgshortcodes/templates/link.php"';
-			LinkShortcode += ' rel="{handler: \'iframe\', size: {x: 770, y: 500}}">';
-			LinkShortcode += ' <i class="fa fa-link"></i> ';
-			LinkShortcode += 'Link';
-			LinkShortcode += ' </a>';
-
-			$( ".yjsg-shortcodes" ).append( LinkShortcode );
+			$.each($.parseJSON(yjsg_shortcodes_tpl), function (item, sc)
+			{
+				$( ".yjsg-shortcodes" ).append	(	'<a class="btn yjsg-shortcode-link"'
+												+	' href="'+siteroot+'templates/'+sitetemplate+'/custom/yjsgshortcodes/templates/'+sc["id"]+'.php"'
+												+	' rel="{handler: \'iframe\', size: {x: '+sc["x"]+', y: '+sc["y"]+'}}">'
+												+	' <i class="fa '+sc["icon"]+'"></i> '
+												+	sc["name"]
+												+	'</a>'
+												);
+			});
 
 			if (typeof (SqueezeBox) != 'undefined') {
 				SqueezeBox.close();
